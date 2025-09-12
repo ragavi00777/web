@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .form-section, .preview-section {
+      flex: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      min-width: 300px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .resume-output {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Resume Builder</h1>
+  <div class="container">
+    <!-- Input Form -->
+    <div class="form-section">
+      <h2>Enter Your Details</h2>
+      <label>Name:</label>
+      <input type="text" id="name">
+
+      <label>Email:</label>
+      <input type="email" id="email">
+
+      <label>Education:</label>
+      <textarea id="education" rows="3"></textarea>
+
+      <label>Skills (comma separated):</label>
+      <textarea id="skills" rows="2"></textarea>
+
+      <label>Projects:</label>
+      <textarea id="projects" rows="3"></textarea>
+
+      <button onclick="generateResume()">Generate Resume</button>
+    </div>
+
+    <!-- Resume Preview -->
+    <div class="preview-section">
+      <h2>Your Resume</h2>
+      <div id="resume-output" class="resume-output">
+        <em>Fill out the form to see your resume here...</em>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function generateResume() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const education = document.getElementById('education').value;
+      const skills = document.getElementById('skills').value;
+      const projects = document.getElementById('projects').value;
+
+      const resumeHTML = `
+==========================
+        ${name}
+==========================
+
+📧 Email: ${email}
+
+🎓 Education:
+${education}
+
+🛠 Skills:
+${skills.split(',').map(skill => `- ${skill.trim()}`).join('\n')}
+
+📁 Projects:
+${projects}
+      `;
+
+      document.getElementById('resume-output').innerText = resumeHTML;
+    }
+  </script>
+
+</body>
+</html>
